@@ -1,4 +1,4 @@
 package com.aivle.mini7.controller;
 
-public class HospitalController {
+public class LoadModelController {
 }

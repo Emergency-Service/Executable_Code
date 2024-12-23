@@ -1,0 +1,85 @@
+{{>layouts/header}}
+<style>
+    main {
+            width: 70%; /* 메인 컨텐츠 너비 확대 */
+            background: #ffffff;
+            margin: 30px auto;
+            padding: 30px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            font-size: 28px; /* 제목 글자 크기 추가 확대 */
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 22px; /* 라벨 글자 크기 추가 확대 */
+        }
+        textarea, input {
+            width: 100%;
+            padding: 15px; /* 입력 필드 패딩 확대 */
+            font-size: 20px; /* 입력 필드 글자 크기 추가 확대 */
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 180px; /* 텍스트 영역 높이 추가 확대 */
+            resize: none;
+        }
+        .input-group {
+            display: flex;
+            gap: 20px; /* 입력 필드 간격 확대 */
+        }
+        .example {
+            font-size: 18px; /* 예시 텍스트 크기 추가 확대 */
+            color: #888;
+            margin-top: 8px;
+        }
+        button {
+            background-color: #0056b3;
+            color: #ffffff;
+            font-size: 22px; /* 버튼 글자 크기 추가 확대 */
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #003d80;
+        }
+</style>
+<main>
+    <meta charset="UTF-8">
+    <h2>응급 상황 설명</h2>
+    <form action="/search" method="GET">
+        <div class="form-group">
+            <label for="message">상황 메시지 (필수)</label>
+            <textarea id="message" name="message" placeholder="상황을 최대한 자세히 설명해주세요."></textarea>
+        </div>
+        <div class="form-group input-group">
+            <div>
+                <label for="latitude">위도 (선택)</label>
+                <input type="text" id="latitude" name="latitude" placeholder="위도를 입력해주세요.">
+            </div>
+            <div>
+                <label for="longitude">경도 (선택)</label>
+                <input type="text" id="longitude" name="longitude" placeholder="경도를 입력해주세요.">
+            </div>
+            <div>
+                <label for="hospitals">추천 응급실 수 (선택)</label>
+                <input type="text" id="hospitals" name="hospitals" placeholder="응급실 개수를 입력해주세요.">
+            </div>
+        </div>
+        <p class="example">예시: 서울시청 - 위도: 37.571513, 경도: 126.734086</p>
+        <button type="submit">검색</button>
+    </form>
+</main>
+{{>layouts/footer}}
