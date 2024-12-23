@@ -1,31 +1,35 @@
-// HospitalController.java
 package com.aivle.mini7.controller;
 
-import com.aivle.mini7.client.dto.HospitalResponse;
-import com.aivle.mini7.service.RecommendService;
+import com.aivle.mini7.client.dto.HospitalDto;
+import com.aivle.mini7.service.HospitalService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 @RestController
 @RequestMapping("/hospital")
 public class HospitalController {
-
     @Autowired
-    private RecommendService hospitalService;
+    private HospitalService hospitalService;
 
-    @GetMapping("/recommend_hospital")
-    public Map<String, Object> recommendHospital(
-            @RequestParam("text") String text,
-            @RequestParam("latitude") double latitude,
-            @RequestParam("longitude") double longitude,
-            @RequestParam("count") int count
-    ) {
+    @PostMapping("/recommend_hospital")
+    public ResponseEntity<Map<String, Object>> recommendHospital(@RequestBody HospitalDto request) {
         try {
-            return hospitalService.recommendHospital(text, latitude, longitude, count);
+            Map<String, Object> response = hospitalService.recommendHospital(
+                    request.getText(),
+                    request.getLatitude(),
+                    request.getLongitude(),
+                    request.getCount()
+            );
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return Map.of("error", e.getMessage());
+            return ResponseEntity.badRequest()
+                    .body(Map.of("error", e.getMessage()));
         }
     }
 }
