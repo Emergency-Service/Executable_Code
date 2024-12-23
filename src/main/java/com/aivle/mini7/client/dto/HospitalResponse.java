@@ -1,7 +1,12 @@
 package com.aivle.mini7.client.dto;
+// RecommendHospitalRequest.java
 
-import org.springframework.web.bind.annotation.GetMapping;
+import lombok.Data;
 
+@Data
 public class HospitalResponse {
-
+    private String text;
+    private double latitude;
+    private double longitude;
+    private int count;
 }
