@@ -59,10 +59,10 @@
 <main>
     <meta charset="UTF-8">
     <h2>응급 상황 설명</h2>
-    <form action="/search" method="GET">
+    <form action="/hospital/recommend_hospital" method="Get">
         <div class="form-group">
-            <label for="message">상황 메시지 (필수)</label>
-            <textarea id="message" name="message" placeholder="상황을 최대한 자세히 설명해주세요."></textarea>
+            <label for="text">상황 메시지 (필수)</label>
+            <textarea id="text" name="text" placeholder="상황을 최대한 자세히 설명해주세요."></textarea>
         </div>
         <div class="form-group input-group">
             <div>
@@ -74,8 +74,8 @@
                 <input type="text" id="longitude" name="longitude" placeholder="경도를 입력해주세요.">
             </div>
             <div>
-                <label for="hospitals">추천 응급실 수 (선택)</label>
-                <input type="text" id="hospitals" name="hospitals" placeholder="응급실 개수를 입력해주세요.">
+                <label for="count">추천 응급실 수 (선택)</label>
+                <input type="text" id="count" name="count" placeholder="응급실 개수를 입력해주세요.">
             </div>
         </div>
         <p class="example">예시: 서울시청 - 위도: 37.571513, 경도: 126.734086</p>

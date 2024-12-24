@@ -68,20 +68,16 @@
     <h2>응급 상황 설명</h2>
     <div class="form-group">
         <label for="summary">상황 메시지 요약</label>
-        <input type="text" id="summary" placeholder="머리,아픔,피,고통">
+<!--        <input type="text" id="summary" value="{summary}" readonly>-->
     </div>
     <div class="form-row">
         <div class="form-group">
-            <label for="latitude">위도</label>
-            <input type="text" id="latitude" placeholder="예: 36.851">
+            <label for="keywords">키워드</label>
+<!--            <input type="text" id="keywords" value="{keywords}" readonly>-->
         </div>
         <div class="form-group">
-            <label for="longitude">경도</label>
-            <input type="text" id="longitude" placeholder="예: 126.816">
-        </div>
-        <div class="form-group">
-            <label for="emergency-count">추천 응급실 수</label>
-            <input type="text" id="emergency-count" placeholder="예: 3">
+            <label for="predicted-class">예측 클래스</label>
+            <input type="text" id="predicted-class" value="{{model}}" readonly>
         </div>
     </div>
     <form action="/re_input" method="GET">
@@ -93,16 +89,30 @@
         <tr>
             <th>번호</th>
             <th>병원 이름</th>
-            <th>주소</th>
-            <th>긴급 상황 전형</th>
             <th>전화번호</th>
-            <th>거리</th>
+            <th>주소</th>
+            <th>거리 (km)</th>
+            <th>소요시간</th>
+            <th>도착예정시각</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td colspan="6">데이터 없음</td>
-        </tr>
+<!--        {#nearest_hospitals}-->
+<!--            <tr>-->
+<!--                <td>{@index}</td>-->
+<!--                <td>{hospital_name}</td>-->
+<!--                <td>{tel1}</td>-->
+<!--                <td>{}</td>-->
+<!--                <td>{거리 (km)}</td>-->
+<!--                <td>{소요시간}</td>-->
+<!--                <td>{도착예정시각}</td>-->
+<!--            </tr>-->
+<!--        {/nearest_hospitals}-->
+<!--        {^nearest_hospitals}-->
+<!--            <tr>-->
+<!--                <td colspan="7">데이터 없음</td>-->
+<!--            </tr>-->
+<!--        {/nearest_hospitals}-->
         </tbody>
     </table>
 </main>

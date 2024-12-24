@@ -1,19 +1,52 @@
 package com.aivle.mini7.service;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
-import com.aivle.mini7.client.api.FastApiClient;
-import com.aivle.mini7.client.dto.HospitalResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class HospitalService {
+    @Value("${hospital.api.host}")
+    private String fastApiUrl;
 
-    private final FastApiClient fastApiClient;
+    @Autowired
+    private RestTemplate restTemplate;
 
-    public HospitalResponse getNearestHospitals(String request, double latitude, double longitude, int count){
-        return fastApiClient.getNearestHospitals(request, latitude, longitude, count);
+    public Map<String, Object> recommendHospital(String text, double latitude, double longitude, int count) {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.setAcceptCharset(Collections.singletonList(StandardCharsets.UTF_8));
+
+            Map<String, Object> requestBody = new HashMap<>();
+            requestBody.put("text", text);
+            requestBody.put("latitude", latitude);
+            requestBody.put("longitude", longitude);
+            requestBody.put("count", count);
+
+            HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
+
+            ResponseEntity<Map> response = restTemplate.exchange(
+                    fastApiUrl + "/recommend_hospital",
+                    HttpMethod.POST,
+                    entity,
+                    Map.class
+            );
+
+            return response.getBody();
+        } catch (Exception e) {
+            throw new RuntimeException("병원 추천 처리 중 오류 발생: " + e.getMessage(), e);
+        }
     }
 }
